@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import Header from './Header'
 import DropDownPicker from 'react-native-dropdown-picker';
 
@@ -8,10 +8,10 @@ export default function HomeScreen() {
 
   const [monthSearch, setmonthSearch] = useState('');
   const [totalGasto, setTotalGasto] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(null); 
+  const [selectedMonth, setSelectedMonth] = useState(null);
   const [yearSearch, setYearSearch] = useState('');
   const [open, setOpen] = useState(false);
-
+  const [openY, setOpenY] = useState(false);
   const months = [
     { label: 'Janeiro', value: '1' },
     { label: 'Fevereiro', value: '2' },
@@ -57,21 +57,21 @@ export default function HomeScreen() {
     }
   };
 
-    return (
-      
+  return (
+
+    <View>
       <View>
+        <Header />
+      </View>
+
+      <View style={styles.container}>
         <View>
-          <Header />
+          <Text>
+            Selecione o mês
+          </Text>
         </View>
 
         <View>
-          <View>
-            <Text>
-              Você gastou
-            </Text>
-          </View>
-
-          <View>
           <DropDownPicker
             open={open}
             value={selectedMonth} // Use selectedMonth as value
@@ -79,11 +79,40 @@ export default function HomeScreen() {
             setOpen={setOpen}
             setValue={setSelectedMonth} // Set selected month
             setItems={setSelectedMonth}
-            
           />
-          </View>
         </View>
-      </View>
-    )
-  }
 
+        <View>
+          <Text>
+            No ano:
+          </Text>
+        </View>
+        <View>
+          <DropDownPicker
+            open={openY}
+            value={yearSearch} // Use selectedMonth as value
+            items={years}
+            setOpen={setOpenY}
+            setValue={setYearSearch} // Set selected month
+            setItems={setYearSearch}
+          />
+        </View>
+
+
+        <View style={styles.button}>
+          <Button style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => handlePost(e)} />
+        </View>
+
+      </View>
+    </View>
+  )
+}
+const styles = StyleSheet.create({
+  container: {
+    padding: 40
+  },
+  button: {
+    padding: 30
+
+  },
+})
