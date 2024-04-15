@@ -65,45 +65,40 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.container}>
-        <View>
-          <Text>
-            Selecione o mês
-          </Text>
-        </View>
+  <View>
+    <Text>Selecione o mês</Text>
+  </View>
 
-        <View>
-          <DropDownPicker
-            open={open}
-            value={selectedMonth} // Use selectedMonth as value
-            items={months}
-            setOpen={setOpen}
-            setValue={setSelectedMonth} // Set selected month
-            setItems={setSelectedMonth}
-          />
-        </View>
+  <View style={styles.dropdownContainer}>
+    <DropDownPicker
+      open={open}
+      value={selectedMonth} // Use selectedMonth as value
+      items={months}
+      setOpen={setOpen}
+      setValue={setSelectedMonth} // Set selected month
+      setItems={setSelectedMonth}
+    />
+  </View>
 
-        <View>
-          <Text>
-            No ano:
-          </Text>
-        </View>
-        <View>
-          <DropDownPicker
-            open={openY}
-            value={yearSearch} // Use selectedMonth as value
-            items={years}
-            setOpen={setOpenY}
-            setValue={setYearSearch} // Set selected month
-            setItems={setYearSearch}
-          />
-        </View>
+  <View>
+    <Text>No ano:</Text>
+  </View>
 
+  <View style={styles.dropdown2}>
+    <DropDownPicker
+      open={openY}
+      value={yearSearch} // Use selectedMonth as value
+      items={years}
+      setOpen={setOpenY}
+      setValue={setYearSearch} // Set selected month
+      setItems={setYearSearch}
+    />
+  </View>
+  <View style={styles.button}>
+    <Button style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => handlePost(e)} />
+  </View>
 
-        <View style={styles.button}>
-          <Button style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => handlePost(e)} />
-        </View>
-
-      </View>
+</View>
     </View>
   )
 }
@@ -115,4 +110,13 @@ const styles = StyleSheet.create({
     padding: 30
 
   },
-})
+
+  dropdownContainer: {
+    zIndex: 2,
+    elevation: 1
+  },
+
+  dropdown2:{
+    zIndex:1
+  }
+});
