@@ -18,7 +18,7 @@ export default AddFood = () => {
         brand: brand,
         kg: kg,
         price: price
-      })
+      });
       console.log("Adicionado com Sucesso");
 
     } catch (error) {
