@@ -1,4 +1,5 @@
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { Button } from 'react-native-paper';
 import React, { useState } from 'react'
 import Header from '../HomeScreen/Header'
 import api from '../../Services/api.js'
@@ -61,7 +62,7 @@ export default AddFood = () => {
         </View>
 
         <View style={styles.button}>
-          <Button style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => handlePost(e)} />
+          <Button mode="contained" style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => handlePost(e)}>Enviar</Button>
         </View>
       </View>
     </View>

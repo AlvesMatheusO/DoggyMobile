@@ -26,6 +26,7 @@ const HistoricCard = ({ foods }) => {
                 <Card.Content>
 
                     {foods.map((food, index) => (
+                        
                         <View key={index}>
                             <Text variant="titleLarge">{food.brand}</Text>
                             <Text variant="bodyMedium">{food.kg.$numberDecimal} Kg</Text>
@@ -33,10 +34,9 @@ const HistoricCard = ({ foods }) => {
                             <Text variant="bodyMedium">{food.date}</Text>
 
                             <Card.Actions>
-                                <Button>Cancel</Button>
-                                <Button>Ok</Button>
+                                <Button>Editar</Button>
+                                <Button>Deletar</Button>
                             </Card.Actions>
-
                         </View>
                     ))}
 

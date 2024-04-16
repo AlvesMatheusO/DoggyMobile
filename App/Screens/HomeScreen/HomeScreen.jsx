@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { Button } from 'react-native-paper';
 import Header from './Header'
 import DropDownPicker from 'react-native-dropdown-picker';
 import api from '../../Services/api.js';
@@ -101,7 +102,7 @@ export default function HomeScreen() {
           />
         </View>
         <View style={styles.button}>
-          <Button style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => calculateTotalperMonth(e)} />
+          <Button mode="contained" onPress={(e) => calculateTotalperMonth(e)}>Enviar</Button>
         </View>
 
       </View>
