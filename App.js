@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/tabNavigation';
 import HomeScreen from './App/Screens/HomeScreen/HomeScreen';
 
+
 export default function App() {
   return (
     <View style={styles.container}>
@@ -11,7 +12,7 @@ export default function App() {
       <NavigationContainer>
         <TabNavigation />
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="dark-content"/>
     </View>
 
 
@@ -21,7 +22,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#black',
     paddingTop: 20
   },
 });

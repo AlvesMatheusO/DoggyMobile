@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import Header from '../HomeScreen/Header';
 import api from '../../Services/api.js';
 import HistoricCard from '../../Components/HistoricCard/historicCard.jsx';
+import ModalDelete from '../../Components/HistoricModalDelete/historicModalDelete.jsx';
 
 function HistoricScreen() {
 
@@ -10,10 +11,8 @@ function HistoricScreen() {
     const [kg, setKg] = useState(null);
     const [price, setPrice] = useState(null);
 
-    const [toggleModalDelete, setToggleModalDelete] = useState(false);
-    const [toggleModalEdit, setToggleModalEdit] = useState(false)
 
-    const [clicekdId, setClicekdId] = useState(null)
+    const [clicekdId, setClickedId] = useState(null)
     const id = clicekdId;
 
     const [foods, setFoods] = useState([]);
@@ -36,6 +35,16 @@ function HistoricScreen() {
         getFoods();
     }, []);
 
+    const deleteFood = async () => {
+
+        try {
+            await api.delete(`/food/${id}`)
+                .then(() => alert('Ração deletada com sucesso'));
+            window.location.reload()
+        } catch (error) {
+            alert("Não foi possivel apagar sua ração. ", error)
+        }
+    }
 
     return (
         <View>
@@ -46,13 +55,22 @@ function HistoricScreen() {
             <View>
                 <HistoricCard
                     foods={foods}
-                    getFoods={getFoods} />
-
-                    
+                    getFoods={getFoods} 
+                    // modalVisible={modalVisible}
+                    // setModalVisible={setModalVisible}
+                    setClickedId={setClickedId}/>
             </View>
+
+            {/* {modalVisible ? (
+                <View>
+                    <ModalDelete 
+                    modalVisible={modalVisible}
+                    deleteFood={deleteFood} />
+                </View>
+            ): (null)
+            } */}
         </View>
     )
 }
-
 
 export default HistoricScreen;
