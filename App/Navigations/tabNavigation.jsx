@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Screens/HomeScreen/HomeScreen.jsx";
 import AddFood from "../Screens/AddFoodScreen/AddFood.jsx";
 import ProfileScreen from "../Screens/ProfileScreen/ProfileScreen.jsx";
-import { Entypo,FontAwesome, FontAwesome6} from '@expo/vector-icons';
+import { Entypo,FontAwesome, FontAwesome5, FontAwesome6, AntDesign} from '@expo/vector-icons';
+import HitoricScreen from "../Screens/HistoricScreen/historicScreen.jsx";
 
 
 
@@ -36,13 +37,13 @@ export default function TabNavigation() {
                 )
             }}/>
       
-            <Tab.Screen name='profile' component={ProfileScreen}
+            <Tab.Screen name='history' component={HitoricScreen}
             options={{
                 tabBarLabel:({color}) => (
-                    <Text style={{color: color, fontSize: 12, marginTop: -7}}>Perfil</Text>
+                    <Text style={{color: color, fontSize: 12, marginTop: -7}}>Histórico</Text>
                 ),
                 tabBarIcon:({color, size}) => (
-                    <FontAwesome name="user-circle" size={24} color="black" />
+                    <FontAwesome5 name="book" size={24} color="black" />
                 )
             }} />
         </Tab.Navigator>

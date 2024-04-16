@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import Header from './Header'
 import DropDownPicker from 'react-native-dropdown-picker';
+import api from '../../Services/api.js';
 
 
 export default function HomeScreen() {
@@ -10,6 +11,8 @@ export default function HomeScreen() {
   const [totalGasto, setTotalGasto] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [yearSearch, setYearSearch] = useState('');
+  
+
   const [open, setOpen] = useState(false);
   const [openY, setOpenY] = useState(false);
   const months = [
@@ -45,13 +48,16 @@ export default function HomeScreen() {
 
   const calculateTotalperMonth = async () => {
     try {
-      const response = await fetch("/weight", {
+      const response = await api("/weight", {
         params: {
-          numero: monthSearch
+          numero: selectedMonth
         }
       });
-      const total = response.data[monthSearch] || 0;
-      setTotalGasto(total);
+      const total = response.data[selectedMonth] || 0;
+    
+      setTotalGasto(total.toFixed(2));
+      
+      console.log(total)
     } catch (error) {
       console.error("Erro ao calcular por mês", error);
     }
@@ -65,40 +71,49 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.container}>
-  <View>
-    <Text>Selecione o mês</Text>
-  </View>
+        <View>
+          <Text>Selecione o mês</Text>
+        </View>
 
-  <View style={styles.dropdownContainer}>
-    <DropDownPicker
-      open={open}
-      value={selectedMonth} // Use selectedMonth as value
-      items={months}
-      setOpen={setOpen}
-      setValue={setSelectedMonth} // Set selected month
-      setItems={setSelectedMonth}
-    />
-  </View>
+        <View style={styles.dropdownContainer}>
+          <DropDownPicker
+            open={open}
+            value={selectedMonth} // Use selectedMonth as value
+            items={months}
+            setOpen={setOpen}
+            setValue={setSelectedMonth} // Set selected month
+            setItems={setSelectedMonth}
+          />
+        </View>
 
-  <View>
-    <Text>No ano:</Text>
-  </View>
+        <View>
+          <Text>No ano:</Text>
+        </View>
 
-  <View style={styles.dropdown2}>
-    <DropDownPicker
-      open={openY}
-      value={yearSearch} // Use selectedMonth as value
-      items={years}
-      setOpen={setOpenY}
-      setValue={setYearSearch} // Set selected month
-      setItems={setYearSearch}
-    />
-  </View>
-  <View style={styles.button}>
-    <Button style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => handlePost(e)} />
-  </View>
+        <View style={styles.dropdown2}>
+          <DropDownPicker
+            open={openY}
+            value={yearSearch} // Use selectedMonth as value
+            items={years}
+            setOpen={setOpenY}
+            setValue={setYearSearch} // Set selected month
+            setItems={setYearSearch}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button style={{ borderRadius: 20 }} title='Enviar' onPress={(e) => calculateTotalperMonth(e)} />
+        </View>
 
-</View>
+      </View>
+
+
+    <View style={styles.containerResult}>
+      <View style={styles.result}>
+        <Text>Total gasto no mês: {selectedMonth}</Text>
+        <Text>R$ {totalGasto}</Text>
+      </View>
+    </View>
+
     </View>
   )
 }
@@ -116,7 +131,23 @@ const styles = StyleSheet.create({
     elevation: 1
   },
 
-  dropdown2:{
-    zIndex:1
+  dropdown2: {
+    zIndex: 1
+  },
+
+  containerResult:{
+    padding: 40,
+    alignItems: "center",
+    alignContent: "center",
+  },
+
+  result:{
+    padding: 50,
+    alignItems: "center",
+    alignContent: "center",
+    backgroundColor: '#200fbab4',
+    borderRadius: 10,
   }
+
+
 });
