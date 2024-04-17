@@ -3,11 +3,14 @@ import { View, StyleSheet } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
 import { ScrollView, SafeAreaView, Modal } from 'react-native';
 import { useState } from 'react';
-import HistoricModalDelete from '../HistoricModalDelete/historicModalDelete.jsx'
+import HistoricModalDelete from '../HistoricModalDelete/historicModalDelete.jsx';
+import HistoricModalEdit from '../../Components/HistoricModalEdit/historicModalEdit.jsx';
 
-const HistoricCard = ({ foods, setClickedId, deleteFood }) => {
+const HistoricCard = 
+({ foods, setClickedId, deleteFood, editFood, brand, setBrand, kg, setKg, price, setPrice}) => {
 
     const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
+    const [modalEditVisible, setModalEditVisible] = useState(false);
 
     return (
         <View>
@@ -26,14 +29,17 @@ const HistoricCard = ({ foods, setClickedId, deleteFood }) => {
                                     <Text variant="bodyMedium">{food.date}</Text>
 
                                     <Card.Actions>
-                                        <Button>Editar</Button>
+                                        <Button
+                                            onPress={() => {
+                                                setClickedId(food._id)
+                                                setModalEditVisible(true)
+                                            }}>Editar</Button>
 
                                         <Button
-                                        onPress={() => {
-                                            setClickedId(food._id)
-                                            setModalDeleteVisible(true)
-                                            console.log("pressed")
-                                        }}
+                                            onPress={() => {
+                                                setClickedId(food._id)
+                                                setModalDeleteVisible(true)
+                                            }}
                                         >Deletar</Button>
                                     </Card.Actions>
                                 </View>
@@ -43,14 +49,28 @@ const HistoricCard = ({ foods, setClickedId, deleteFood }) => {
                 </ScrollView>
             </SafeAreaView>
 
-            <HistoricModalDelete    
-                setModalDeleteVisible={setModalDeleteVisible} 
-                modalDeleteVisible={modalDeleteVisible} 
+            <HistoricModalDelete
+                setModalDeleteVisible={setModalDeleteVisible}
+                modalDeleteVisible={modalDeleteVisible}
                 setClickedId={setClickedId}
-                deleteFood={deleteFood}/>
+                deleteFood={deleteFood} />
+
+            <HistoricModalEdit
+
+                brand={brand}
+                setBrand={setBrand}
+                kg={kg}
+                setKg={setKg}
+                price={price}
+                setPrice={setPrice}
+
+                setModalEditVisible={setModalEditVisible}
+                modalEditVisible={modalEditVisible}
+                setClickedId={setClickedId}
+                editFood={editFood} />
         </View>
     );
-    
+
 };
 
 

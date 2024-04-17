@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Header from '../HomeScreen/Header';
 import api from '../../Services/api.js';
 import HistoricCard from '../../Components/HistoricCard/historicCard.jsx';
-import ModalDelete from '../../Components/HistoricModalDelete/historicModalDelete.jsx';
+
 
 function HistoricScreen() {
 
@@ -35,6 +35,7 @@ function HistoricScreen() {
         getFoods();
     }, []);
 
+
     const deleteFood = async () => {
 
         try {
@@ -43,6 +44,20 @@ function HistoricScreen() {
             getFoods();
         } catch (error) {
             alert("Não foi possivel apagar sua ração. ", error)
+        }
+    }
+
+    const editFood = async () => {
+
+        try {
+            await api.put(`/food/${id}`, {
+                brand: brand,
+                kg: kg,
+                price: price
+            }).then(alert("Ração Editada com sucesso"));
+            getFoods();
+        } catch (error) {
+            alert("erro ao editar ração ", error);
         }
     }
 
@@ -57,7 +72,15 @@ function HistoricScreen() {
                     foods={foods}
                     getFoods={getFoods} 
                     setClickedId={setClickedId}
-                    deleteFood={deleteFood}/>
+                    deleteFood={deleteFood}
+                    editFood={editFood} 
+                    
+                    brand={brand}
+                    setBrand={setBrand}
+                    kg={kg}
+                    setKg={setKg}
+                    price={price}
+                    setPrice={setPrice}/>
             </View>
         </View>
     )
