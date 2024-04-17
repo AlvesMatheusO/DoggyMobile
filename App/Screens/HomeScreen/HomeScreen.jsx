@@ -77,8 +77,8 @@ export default function HomeScreen() {
           <Text>Selecione o mês</Text>
         </View>
 
-        <View style={styles.dropdownContainer}>
-          <DropDownPicker
+        <View>
+          <DropDownPicker style={styles.dropdownContainer}
             open={open}
             value={selectedMonth} // Use selectedMonth as value
             items={months}
@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 30
-
   },
 
   dropdownContainer: {
