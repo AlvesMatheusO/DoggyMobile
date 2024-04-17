@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, Pressable, View } from 'react-native';
 
 
-export default function ModalDelete({ deleteFood, modalVisible, setModalVisible}) {
+export default function ModalDelete({ deleteFood, modalDeleteVisible, setModalDeleteVisible}) {
 
   
 
@@ -11,9 +11,9 @@ export default function ModalDelete({ deleteFood, modalVisible, setModalVisible}
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}
+                visible={modalDeleteVisible}
                 onRequestClose={() => {
-                    setModalVisible(!modalVisible);
+                    setModalDeleteVisible(!modalDeleteVisible);
                 }}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
@@ -21,7 +21,7 @@ export default function ModalDelete({ deleteFood, modalVisible, setModalVisible}
                         <Text>Tem certeza que deseja deletar ração?</Text>
                         <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
+                            onPress={() => setModalDeleteVisible(!modalDeleteVisible)}>
                             {/* <Text style={styles.textStyle}>Fechar</Text> */}
                             <Text style={styles.textStyle}>Deletar</Text>
                         </Pressable>

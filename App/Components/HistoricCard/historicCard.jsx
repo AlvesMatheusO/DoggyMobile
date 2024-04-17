@@ -9,8 +9,6 @@ const HistoricCard = ({ foods, setClickedId }) => {
 
     const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
 
-
-
     return (
         <View>
             <SafeAreaView>
