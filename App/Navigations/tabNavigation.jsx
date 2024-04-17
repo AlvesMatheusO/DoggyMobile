@@ -24,7 +24,7 @@ export default function TabNavigation() {
                     <Text style={{color:color, fontSize:12, marginTop: -7}}>Home</Text>
                 ),
                 tabBarIcon:({color, size}) => (
-                    <Entypo name="home" size={24} color="black" />
+                    <Entypo name="home" size={24} color="purple" />
                 )
             }} />
             <Tab.Screen name='addFood' component={AddFood} 
@@ -43,7 +43,7 @@ export default function TabNavigation() {
                     <Text style={{color: color, fontSize: 12, marginTop: -7}}>Histórico</Text>
                 ),
                 tabBarIcon:({color, size}) => (
-                    <FontAwesome5 name="book" size={24} color="black" />
+                    <FontAwesome5 name="book" size={24} color="purple" />
                 )
             }} />
         </Tab.Navigator>
