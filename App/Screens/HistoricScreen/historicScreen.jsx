@@ -3,6 +3,8 @@ import { View, Text } from 'react-native';
 import Header from '../HomeScreen/Header';
 import api from '../../Services/api.js';
 import HistoricCard from '../../Components/HistoricCard/historicCard.jsx';
+import { ScrollView, SafeAreaView, StyleSheet} from 'react-native';
+
 
 
 function HistoricScreen() {
@@ -66,24 +68,32 @@ function HistoricScreen() {
             <View>
                 <Header />
             </View>
-
-            <View>
+            <ScrollView style={styles.container}>
                 <HistoricCard
                     foods={foods}
-                    getFoods={getFoods} 
+                    getFoods={getFoods}
                     setClickedId={setClickedId}
                     deleteFood={deleteFood}
-                    editFood={editFood} 
-                    
+                    editFood={editFood}
+
                     brand={brand}
                     setBrand={setBrand}
                     kg={kg}
                     setKg={setKg}
                     price={price}
-                    setPrice={setPrice}/>
-            </View>
+                    setPrice={setPrice} />
+            </ScrollView>
         </View>
+
     )
 }
+
+const styles = StyleSheet.create({
+    container:{
+        marginTop:10,
+        marginBottom:20,
+        padding:5
+    }
+})
 
 export default HistoricScreen;

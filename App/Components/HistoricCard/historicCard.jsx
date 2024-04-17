@@ -1,77 +1,72 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
-import { ScrollView, SafeAreaView, Modal } from 'react-native';
 import { useState } from 'react';
 import HistoricModalDelete from '../HistoricModalDelete/historicModalDelete.jsx';
 import HistoricModalEdit from '../../Components/HistoricModalEdit/historicModalEdit.jsx';
 
-const HistoricCard = 
-({ foods, setClickedId, deleteFood, editFood, brand, setBrand, kg, setKg, price, setPrice}) => {
+const HistoricCard =
+    ({ foods, setClickedId, deleteFood, editFood, brand, setBrand, kg, setKg, price, setPrice }) => {
 
-    const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
-    const [modalEditVisible, setModalEditVisible] = useState(false);
+        const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
+        const [modalEditVisible, setModalEditVisible] = useState(false);
 
-    return (
-        <View>
-            <SafeAreaView>
-                <ScrollView>
-                    {console.log(foods)}
-                    <Card>
-                        <Card.Content style={styles.container}>
+        return (
+            <View>
+                {console.log(foods)}
+                <Card>
+                    <Card.Content style={styles.container}>
 
-                            {foods.map((food, index) => (
+                        {foods.map((food, index) => (
 
-                                <View style={styles.card} key={index}>
-                                    <Text variant="titleLarge">{food.brand}</Text>
-                                    <Text variant="bodyMedium">{food.kg.$numberDecimal} Kg</Text>
-                                    <Text variant="bodyMedium">R$ {food.price.$numberDecimal}</Text>
-                                    <Text variant="bodyMedium">{food.date}</Text>
+                            <View style={styles.card} key={index}>
+                                <Text variant="titleLarge">{food.brand}</Text>
+                                <Text variant="bodyMedium">{food.kg.$numberDecimal} Kg</Text>
+                                <Text variant="bodyMedium">R$ {food.price.$numberDecimal}</Text>
+                                <Text variant="bodyMedium">{food.date}</Text>
 
-                                    <Card.Actions>
-                                        <Button
-                                            onPress={() => {
-                                                setClickedId(food._id)
-                                                setModalEditVisible(true)
-                                            }}>Editar</Button>
+                                <Card.Actions>
+                                    <Button
+                                        onPress={() => {
+                                            setClickedId(food._id)
+                                            setModalEditVisible(true)
+                                        }}>Editar</Button>
 
-                                        <Button
-                                            onPress={() => {
-                                                setClickedId(food._id)
-                                                setModalDeleteVisible(true)
-                                            }}
-                                        >Deletar</Button>
-                                    </Card.Actions>
-                                </View>
-                            ))}
-                        </Card.Content>
-                    </Card>
-                </ScrollView>
-            </SafeAreaView>
+                                    <Button
+                                        onPress={() => {
+                                            setClickedId(food._id)
+                                            setModalDeleteVisible(true)
+                                        }}
+                                    >Deletar</Button>
+                                </Card.Actions>
+                            </View>
+                        ))}
+                    </Card.Content>
+                </Card>
 
-            <HistoricModalDelete
-                setModalDeleteVisible={setModalDeleteVisible}
-                modalDeleteVisible={modalDeleteVisible}
-                setClickedId={setClickedId}
-                deleteFood={deleteFood} />
+                <HistoricModalDelete
+                    setModalDeleteVisible={setModalDeleteVisible}
+                    modalDeleteVisible={modalDeleteVisible}
+                    setClickedId={setClickedId}
+                    deleteFood={deleteFood} />
 
-            <HistoricModalEdit
+                <HistoricModalEdit
 
-                brand={brand}
-                setBrand={setBrand}
-                kg={kg}
-                setKg={setKg}
-                price={price}
-                setPrice={setPrice}
+                    brand={brand}
+                    setBrand={setBrand}
+                    kg={kg}
+                    setKg={setKg}
+                    price={price}
+                    setPrice={setPrice}
 
-                setModalEditVisible={setModalEditVisible}
-                modalEditVisible={modalEditVisible}
-                setClickedId={setClickedId}
-                editFood={editFood} />
-        </View>
-    );
+                    setModalEditVisible={setModalEditVisible}
+                    modalEditVisible={modalEditVisible}
+                    setClickedId={setClickedId}
+                    editFood={editFood} />
+            </View>
+        );
 
-};
+    };
 
 
 

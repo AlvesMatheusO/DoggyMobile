@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native'
 import { Button } from 'react-native-paper';
 import React, { useState } from 'react'
 import Header from '../HomeScreen/Header'
@@ -13,20 +13,42 @@ export default AddFood = () => {
   const handlePost = async (e) => {
     e.preventDefault();
 
-    try {
+    const combinedText = brand + kg + price;
 
-      await api.post('/food', {
-        brand: brand,
-        kg: kg,
-        price: price
-      });
-      console.log("Adicionado com Sucesso");
+    if (containsEmoji(combinedText)) {
+      Alert.alert("Erro!", "Não é possivel inserir ração com emoji")
+    } else {
 
-    } catch (error) {
-      console.log(error)
-      console.log(brand, kg, price)
+      try {
+  
+        await api.post('/food', {
+          brand: brand,
+          kg: kg,
+          price: price
+        });
+        Alert.alert('Inserir Ração', 'Ração Inserida com sucesso!', [
+          {
+            text: 'sair'
+          }
+        ]);
+  
+      } catch (error) {
+        console.log(error)
+        console.log(brand, kg, price)
+      }
+    }
+  }
+
+  const containsEmoji = (text) => {
+    const emojiRegex = /[\u{1F600}-\u{1F64F}]/u;
+
+    for(let i = 0; i < text.lenght; i++) {
+      if (emojiRegex.test(text[i])) {
+        return true;
+      }
     }
 
+    return false;
   }
   return (
     <View>

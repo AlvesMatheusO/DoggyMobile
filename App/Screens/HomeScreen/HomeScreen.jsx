@@ -48,6 +48,7 @@ export default function HomeScreen() {
 
 
   const calculateTotalperMonth = async () => {
+
     try {
       const response = await api("/weight", {
         params: {
