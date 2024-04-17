@@ -22,17 +22,12 @@ export default function ModalDelete({ deleteFood, modalVisible, setModalVisible}
                         <Pressable
                             style={[styles.button, styles.buttonClose]}
                             onPress={() => setModalVisible(!modalVisible)}>
-                            <Text style={styles.textStyle}>Fechar</Text>
+                            {/* <Text style={styles.textStyle}>Fechar</Text> */}
                             <Text style={styles.textStyle}>Deletar</Text>
                         </Pressable>
                     </View>
                 </View>
             </Modal>
-            <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => setModalVisible(true)}>
-                <Text style={styles.textStyle}>Show Modal</Text>
-            </Pressable>
         </View>
 
     );

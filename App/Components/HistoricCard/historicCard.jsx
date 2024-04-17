@@ -1,57 +1,59 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
-import { ScrollView, SafeAreaView } from 'react-native';
+import { ScrollView, SafeAreaView, Modal } from 'react-native';
 import { useState } from 'react';
+import HistoricModalDelete from '../HistoricModalDelete/historicModalDelete.jsx'
 
-const HistoricCard = ({ foods, toggleModalDelete, setClickedId, setToggleModalDelete }) => {
+const HistoricCard = ({ foods, setClickedId }) => {
 
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
 
 
 
     return (
         <View>
-        <SafeAreaView>
-            <ScrollView>
-                {console.log(foods)}
-                <Card>
-                    <Card.Content style={styles.container}>
+            <SafeAreaView>
+                <ScrollView>
+                    {console.log(foods)}
+                    <Card>
+                        <Card.Content style={styles.container}>
 
-                        {foods.map((food, index) => (
+                            {foods.map((food, index) => (
 
-                            <View style={styles.card} key={index}>
-                                <Text variant="titleLarge">{food.brand}</Text>
-                                <Text variant="bodyMedium">{food.kg.$numberDecimal} Kg</Text>
-                                <Text variant="bodyMedium">R$ {food.price.$numberDecimal}</Text>
-                                <Text variant="bodyMedium">{food.date}</Text>
+                                <View style={styles.card} key={index}>
+                                    <Text variant="titleLarge">{food.brand}</Text>
+                                    <Text variant="bodyMedium">{food.kg.$numberDecimal} Kg</Text>
+                                    <Text variant="bodyMedium">R$ {food.price.$numberDecimal}</Text>
+                                    <Text variant="bodyMedium">{food.date}</Text>
 
-                                <Card.Actions>
-                                    <Button>Editar</Button>
+                                    <Card.Actions>
+                                        <Button>Editar</Button>
 
-                                    <Button onPress={() => {
-                                        setClickedId(food._id)
-                                        setToggleModalDelete();
-                                        modalVisible()
-                                        console.log("pressed")
-                                        
-                                    }}
-                                    >Deletar</Button>
-                                </Card.Actions>
-                            </View>
-                        ))}
+                                        <Button
+                                        onPress={() => {
+                                            setClickedId(food._id)
+                                            setModalDeleteVisible(true)
+                                            console.log("pressed")
+                                        }}
+                                        >Deletar</Button>
+                                    </Card.Actions>
+                                </View>
+                            ))}
+                        </Card.Content>
+                    </Card>
+                </ScrollView>
+            </SafeAreaView>
 
-                    </Card.Content>
-
-                </Card>
-            </ScrollView>
-        </SafeAreaView>
-                        
-        
+            <HistoricModalDelete    
+                setModalDeleteVisible={setModalDeleteVisible} 
+                modalDeleteVisible={modalDeleteVisible} />
         </View>
-        
     );
+    
 };
+
+
 
 const styles = StyleSheet.create({
     container: {

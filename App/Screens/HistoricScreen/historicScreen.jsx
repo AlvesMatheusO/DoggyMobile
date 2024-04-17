@@ -56,19 +56,8 @@ function HistoricScreen() {
                 <HistoricCard
                     foods={foods}
                     getFoods={getFoods} 
-                    // modalVisible={modalVisible}
-                    // setModalVisible={setModalVisible}
                     setClickedId={setClickedId}/>
             </View>
-
-            {/* {modalVisible ? (
-                <View>
-                    <ModalDelete 
-                    modalVisible={modalVisible}
-                    deleteFood={deleteFood} />
-                </View>
-            ): (null)
-            } */}
         </View>
     )
 }
