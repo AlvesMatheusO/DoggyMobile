@@ -5,7 +5,7 @@ import { ScrollView, SafeAreaView, Modal } from 'react-native';
 import { useState } from 'react';
 import HistoricModalDelete from '../HistoricModalDelete/historicModalDelete.jsx'
 
-const HistoricCard = ({ foods, setClickedId }) => {
+const HistoricCard = ({ foods, setClickedId, deleteFood }) => {
 
     const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
 
@@ -45,7 +45,9 @@ const HistoricCard = ({ foods, setClickedId }) => {
 
             <HistoricModalDelete    
                 setModalDeleteVisible={setModalDeleteVisible} 
-                modalDeleteVisible={modalDeleteVisible} />
+                modalDeleteVisible={modalDeleteVisible} 
+                setClickedId={setClickedId}
+                deleteFood={deleteFood}/>
         </View>
     );
     

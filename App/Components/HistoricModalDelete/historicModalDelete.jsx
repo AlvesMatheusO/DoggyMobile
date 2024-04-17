@@ -2,77 +2,95 @@ import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, Pressable, View } from 'react-native';
 
 
-export default function ModalDelete({ deleteFood, modalDeleteVisible, setModalDeleteVisible}) {
+export default function ModalDelete({ deleteFood, setClickedId, modalDeleteVisible, setModalDeleteVisible }) {
 
-  
 
-    return (
+
+  return (
+    <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalDeleteVisible}
+        onRequestClose={() => {
+          setModalDeleteVisible(!modalDeleteVisible);
+        }}>
         <View style={styles.centeredView}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalDeleteVisible}
-                onRequestClose={() => {
-                    setModalDeleteVisible(!modalDeleteVisible);
-                }}>
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Deletar Ração</Text>
-                        <Text>Tem certeza que deseja deletar ração?</Text>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalDeleteVisible(!modalDeleteVisible)}>
-                            {/* <Text style={styles.textStyle}>Fechar</Text> */}
-                            <Text style={styles.textStyle}>Deletar</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </Modal>
-        </View>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Deletar Ração</Text>
+            <Text>Tem certeza que deseja deletar ração?</Text>
 
-    );
+            <View style={styles.buttonRow}>
+              <Pressable
+                style={[styles.button, styles.buttonOpen]}
+                onPress={() => setModalDeleteVisible(!modalDeleteVisible)}>
+                {/* <Text style={styles.textStyle}>Fechar</Text> */}
+                <Text style={styles.textStyle}>Fechar</Text>
+              </Pressable>
+
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => [setModalDeleteVisible(!modalDeleteVisible), deleteFood(setClickedId)]}>
+                {/* <Text style={styles.textStyle}>Fechar</Text> */}
+                <Text style={styles.textStyle}>Deletar</Text>
+              </Pressable>
+            </View>
+
+          </View>
+        </View>
+      </Modal>
+    </View>
+
+  );
 };
 
 const styles = StyleSheet.create({
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 22,
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    modalView: {
-      margin: 20,
-      backgroundColor: 'white',
-      borderRadius: 20,
-      padding: 35,
-      alignItems: 'center',
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5,
-    },
-    button: {
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2,
-    },
-    buttonOpen: {
-      backgroundColor: '#F194FF',
-    },
-    buttonClose: {
-      backgroundColor: '#2196F3',
-    },
-    textStyle: {
-      color: 'white',
-      fontWeight: 'bold',
-      textAlign: 'center',
-    },
-    modalText: {
-      marginBottom: 15,
-      textAlign: 'center',
-    },
-  })
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  buttonRow:{
+    flexDirection: "row",
+    top: 20,
+    
+  },
+
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+})

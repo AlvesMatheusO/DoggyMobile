@@ -40,7 +40,7 @@ function HistoricScreen() {
         try {
             await api.delete(`/food/${id}`)
                 .then(() => alert('Ração deletada com sucesso'));
-            window.location.reload()
+            getFoods();
         } catch (error) {
             alert("Não foi possivel apagar sua ração. ", error)
         }
@@ -56,7 +56,8 @@ function HistoricScreen() {
                 <HistoricCard
                     foods={foods}
                     getFoods={getFoods} 
-                    setClickedId={setClickedId}/>
+                    setClickedId={setClickedId}
+                    deleteFood={deleteFood}/>
             </View>
         </View>
     )
