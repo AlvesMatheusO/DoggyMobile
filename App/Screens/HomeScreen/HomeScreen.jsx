@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import { Button } from 'react-native-paper';
 import Header from './Header'
+import Chart from '../../Components/HomeChart/Chart.jsx'
 import DropDownPicker from 'react-native-dropdown-picker';
 import api from '../../Services/api.js';
+
 
 
 export default function HomeScreen() {
@@ -12,7 +14,7 @@ export default function HomeScreen() {
   const [totalGasto, setTotalGasto] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [yearSearch, setYearSearch] = useState('');
-  
+
 
   const [open, setOpen] = useState(false);
   const [openY, setOpenY] = useState(false);
@@ -56,14 +58,17 @@ export default function HomeScreen() {
         }
       });
       const total = response.data[selectedMonth] || 0;
-    
+
       setTotalGasto(total.toFixed(2));
-      
+
       console.log(total)
     } catch (error) {
       console.error("Erro ao calcular por mês", error);
     }
   };
+
+
+
 
   return (
 
@@ -106,15 +111,19 @@ export default function HomeScreen() {
           <Button mode="contained" onPress={(e) => calculateTotalperMonth(e)}>Enviar</Button>
         </View>
 
-      </View>
 
 
-    <View style={styles.containerResult}>
-      <View style={styles.result}>
-        <Text>Total gasto no mês: {selectedMonth}</Text>
-        <Text>R$ {totalGasto}</Text>
       </View>
-    </View>
+
+      <View style={styles.containerResult}>
+        <View style={styles.result}>
+          <Text>Total gasto no mês: {selectedMonth}</Text>
+          <Text>R$ {totalGasto}</Text>
+        </View>
+        <View>
+          <Chart />
+        </View>
+      </View>
 
     </View>
   )
@@ -136,19 +145,18 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
 
-  containerResult:{
+  containerResult: {
     padding: 40,
     alignItems: "center",
     alignContent: "center",
+    bottom: 60
   },
 
-  result:{
+  result: {
     padding: 50,
     alignItems: "center",
     alignContent: "center",
     backgroundColor: '#200fbab4',
     borderRadius: 10,
   }
-
-
 });
