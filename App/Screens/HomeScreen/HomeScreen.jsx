@@ -149,11 +149,12 @@ const styles = StyleSheet.create({
     padding: 40,
     alignItems: "center",
     alignContent: "center",
-    bottom: 60
+    bottom: 80
   },
 
   result: {
     padding: 50,
+    width: 380,
     alignItems: "center",
     alignContent: "center",
     backgroundColor: '#200fbab4',

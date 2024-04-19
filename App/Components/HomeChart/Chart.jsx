@@ -34,7 +34,6 @@ export default class ChartHome extends Component {
         try {
             const expenses = await this.fetchMonthlyExpenses();
             const monthlyExpenses = Object.values(expenses);
-            // console.log(monthlyExpenses)
             this.setState({ monthlyExpenses });
         } catch (error) {
             console.error(error);
@@ -44,7 +43,7 @@ export default class ChartHome extends Component {
     fetchMonthlyExpenses = async () => {
         try {
             const response = await api("/weight");
-            // console.log(response.data);
+            
             return response.data;
         } catch (error) {
             console.log(error)
@@ -67,8 +66,8 @@ export default class ChartHome extends Component {
                             }
                         ]
                     }}
-                    width={Dimensions.get("window").width}
-                    height={220}
+                    width={380}
+                    height={250}
                     yAxisLabel="R$"
                     yAxisInterval={1}
                     chartConfig={{
@@ -83,13 +82,13 @@ export default class ChartHome extends Component {
                         },
                         propsForDots: {
                             r: "6",
-                            strokeWidth: "2",
+                            strokeWidth: "3",
                             stroke: "#ffa726"
                         }
                     }}
                     bezier
                     style={{
-                        marginVertical: 8,
+                        marginVertical: 10,
                         borderRadius: 16
                     }}
                 />
