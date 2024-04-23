@@ -16,45 +16,50 @@ export default function ModalEdit({ editFood, setClickedId, modalEditVisible, se
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>Editar Ração</Text>
-                        <Text>Tem certeza que deseja editar ração?</Text>
+                        <Text>Tem certeza que deseja editar a ração?</Text>
 
                         <View style={styles.form}>
 
-                            <Text style={styles.label}>Marca</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={brand}
-                                onChangeText={(text) => setBrand(text)}
-                                required />
+                            <View style={styles.inputContainer}>
+                                <Text style={styles.label}>Marca</Text>
+                                <TextInput
+                                    style={[styles.input, styles.inputWithBorder]}
+                                    value={brand}
+                                    onChangeText={(text) => setBrand(text)}
+                                    required />
+                            </View>
 
-                            <Text style={styles.label}>Peso</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={kg}
-                                onChangeText={(text) => setKg(text)}
-                                required />
+                            <View style={styles.inputContainer}>
+                                <Text style={styles.label}>Peso (kg)</Text>
+                                <TextInput
+                                    style={[styles.input, styles.inputWithBorder]}
+                                    value={kg}
+                                    onChangeText={(text) => setKg(text)}
+                                    keyboardType="numeric"
+                                    required />
+                            </View>
 
-                            <Text style={styles.label}>Preço</Text>
-                            <TextInput
-                                style={styles.input}
-                                value={price}
-                                onChangeText={(text) => setPrice(text)}
-                                required />
+                            <View style={styles.inputContainer}>
+                                <Text style={styles.label}>Preço</Text>
+                                <TextInput
+                                    style={[styles.input, styles.inputWithBorder]}
+                                    value={price}
+                                    onChangeText={(text) => setPrice(text)}
+                                    keyboardType="numeric"
+                                    required />
+                            </View>
                         </View>
-
 
                         <View style={styles.buttonRow}>
                             <Pressable
-                                style={[styles.button, styles.buttonOpen]}
+                                style={[styles.button, styles.buttonSecondary]}
                                 onPress={() => setModalEditVisible(!modalEditVisible)}>
-                                {/* <Text style={styles.textStyle}>Fechar</Text> */}
-                                <Text style={styles.textStyle}>Fechar</Text>
+                                <Text style={styles.textStyle}>Cancelar</Text>
                             </Pressable>
 
                             <Pressable
-                                style={[styles.button, styles.buttonClose]}
+                                style={[styles.button, styles.buttonPrimary]}
                                 onPress={() => [setModalEditVisible(!modalEditVisible), editFood(setClickedId)]}>
-                                {/* <Text style={styles.textStyle}>Fechar</Text> */}
                                 <Text style={styles.textStyle}>Editar</Text>
                             </Pressable>
                         </View>
@@ -88,23 +93,42 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-
+    form: {
+        width: '100%',
+    },
+    inputContainer: {
+        marginBottom: 20,
+    },
+    label: {
+        fontSize: 16,
+        marginBottom: 5,
+    },
+    input: {
+        width: 150,
+        padding: 10,
+        backgroundColor: '#F0F0F0',
+        borderRadius: 10,
+    },
+    inputWithBorder: {
+        borderWidth: 1,
+        borderColor: '#CCCCCC',
+    },
     buttonRow: {
         flexDirection: "row",
-        top: 20,
-
+        marginTop: 20,
     },
-
     button: {
+        flex: 1,
         borderRadius: 20,
         padding: 10,
+        marginHorizontal: 5,
         elevation: 2,
     },
-    buttonOpen: {
-        backgroundColor: '#F194FF',
-    },
-    buttonClose: {
+    buttonPrimary: {
         backgroundColor: '#2196F3',
+    },
+    buttonSecondary: {
+        backgroundColor: '#CCCCCC',
     },
     textStyle: {
         color: 'white',
@@ -114,5 +138,7 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
     },
 })
