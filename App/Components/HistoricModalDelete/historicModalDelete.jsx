@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, Pressable, View } from 'react-native';
 
-
 export default function ModalDelete({ deleteFood, setClickedId, modalDeleteVisible, setModalDeleteVisible }) {
-
-
 
   return (
     <View style={styles.centeredView}>
@@ -22,16 +19,14 @@ export default function ModalDelete({ deleteFood, setClickedId, modalDeleteVisib
 
             <View style={styles.buttonRow}>
               <Pressable
-                style={[styles.button, styles.buttonOpen]}
+                style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalDeleteVisible(!modalDeleteVisible)}>
-                {/* <Text style={styles.textStyle}>Fechar</Text> */}
                 <Text style={styles.textStyle}>Fechar</Text>
               </Pressable>
 
               <Pressable
-                style={[styles.button, styles.buttonClose]}
+                style={[styles.button, styles.buttonDelete]}
                 onPress={() => [setModalDeleteVisible(!modalDeleteVisible), deleteFood(setClickedId)]}>
-                {/* <Text style={styles.textStyle}>Fechar</Text> */}
                 <Text style={styles.textStyle}>Deletar</Text>
               </Pressable>
             </View>
@@ -40,7 +35,6 @@ export default function ModalDelete({ deleteFood, setClickedId, modalDeleteVisib
         </View>
       </Modal>
     </View>
-
   );
 };
 
@@ -66,23 +60,21 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-
-  buttonRow:{
+  buttonRow: {
     flexDirection: "row",
-    top: 20,
-    
+    marginTop: 20,
   },
-
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#808080',
+    marginRight: 10, // Aumentar a margem à direita para separar os botões
+  },
+  buttonDelete: {
+    backgroundColor: '#FF0000', // Cor vermelha
   },
   textStyle: {
     color: 'white',
