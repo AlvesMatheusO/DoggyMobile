@@ -1,28 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import TabNavigation from './App/Navigations/tabNavigation';
-import HomeScreen from './App/Screens/HomeScreen/HomeScreen';
+import { StyleSheet, Text, View } from "react-native";
 
+import Auth from "./App/Screens/AuthScreen/Authscreen.jsx";
 
 export default function App() {
   return (
     <View style={styles.container}>
-   
-      <NavigationContainer>
-        <TabNavigation />
-      </NavigationContainer>
-      <StatusBar style="dark-content"/>
+      <Auth />
+      
+      
     </View>
-
-
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#black',
-    paddingTop: 20
+    backgroundColor: "#black",
+    paddingTop: 20,
   },
 });

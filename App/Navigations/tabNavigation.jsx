@@ -1,12 +1,10 @@
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Screens/HomeScreen/HomeScreen.jsx";
 import AddFood from "../Screens/AddFoodScreen/AddFood.jsx";
-import ProfileScreen from "../Screens/ProfileScreen/ProfileScreen.jsx";
-import { Entypo,FontAwesome, FontAwesome5, FontAwesome6, AntDesign} from '@expo/vector-icons';
+import { Entypo, FontAwesome5, FontAwesome6} from '@expo/vector-icons';
 import HitoricScreen from "../Screens/HistoricScreen/historicScreen.jsx";
-
 
 
 const Tab = createBottomTabNavigator();
@@ -14,6 +12,7 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigation() {
 
     return (
+    
         <Tab.Navigator screenOptions={{
             headerShown: false
         }}>
