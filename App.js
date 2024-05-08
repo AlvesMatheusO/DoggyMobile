@@ -18,6 +18,7 @@ export default function App() {
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} 
           options={{headerShown: false}}/>
           <Stack.Screen name="AuthScreen" component={AuthScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

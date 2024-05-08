@@ -1,17 +1,40 @@
 import React from 'react'
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import { NavigationContainer } from "@react-navigation/native";
 
 import TabNavigation from "../../Navigations/tabNavigation.jsx";
+import api from '../../Services/api.js';
 
-function AuthScreen() {
+function AuthScreen({ navigation }) {
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
+
+
+  const handleRegister = async () => {
+
+    const combinedText = name + email + password + confirmPassword;
+
+    try {
+      await api.post('/auth/register', {
+        name: name,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword
+      });
+      Alert.alert("Usuário criado com Sucesso!");
+      navigation.navigate('HomeScreen');
+
+    } catch (error) {
+      Alert.alert('Erro!', error.message);
+    }
+  }
+
+
 
   return (
     <View style={styles.container}>
@@ -61,13 +84,8 @@ function AuthScreen() {
         />
       </View>
       <View style={styles.button}>
-        <Button mode="contained">Cadastrar</Button>
+        <Button mode="contained" onPress={handleRegister}>Cadastrar</Button>
       </View>
-      {/* <NavigationContainer>
-        <TabNavigation />
-      </NavigationContainer>
-      <StatusBar style="dark-content" /> */}
-
     </View>
   )
 }
