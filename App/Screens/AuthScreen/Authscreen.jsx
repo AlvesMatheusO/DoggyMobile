@@ -28,7 +28,6 @@ function AuthScreen() {
           </Text>
         </View>
 
-
         <Text style={styles.label}>Nome</Text>
         <TextInput
           style={styles.input}
@@ -50,7 +49,7 @@ function AuthScreen() {
           style={styles.input}
           onChangeText={setPassword}
           value={password}
-          placeholder='Digite sua senha'
+          placeholder=' Digite sua senha'
         />
 
         <Text style={styles.label}>Repitir Senha</Text>
@@ -58,7 +57,7 @@ function AuthScreen() {
           style={styles.input}
           onChangeText={setConfirmPassword}
           value={confirmPassword}
-          placeholder='Repita sua senha'
+          placeholder=' Repita sua senha'
         />
       </View>
       <View style={styles.button}>
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
     backgroundColor: "#black",
-    paddingTop: 100,
     alignItems: "center",
     padding: 10
   },

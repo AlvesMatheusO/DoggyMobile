@@ -1,13 +1,25 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import Auth from "./App/Screens/AuthScreen/Authscreen.jsx";
+import OnboardingScreen from "./App/Screens/Onboarding/OnboardingScreen";
+import AuthScreen from "./App/Screens/AuthScreen/Authscreen";
+import HomeScreen from "./App/Screens/HomeScreen/HomeScreen";
+
+import { NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
     <View style={styles.container}>
-      <Auth />
-      
-      
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="OnboardingScreen">
+          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} 
+          options={{headerShown: false}}/>
+          <Stack.Screen name="AuthScreen" component={AuthScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
