@@ -1,8 +1,6 @@
-import React from 'react'
-import { StatusBar } from "expo-status-bar";
+import React from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
-import { NavigationContainer } from "@react-navigation/native";
 
 import TabNavigation from "../../Navigations/tabNavigation.jsx";
 import api from '../../Services/api.js';
@@ -27,7 +25,7 @@ function AuthScreen({ navigation }) {
         confirmPassword: confirmPassword
       });
       Alert.alert("Usuário criado com Sucesso!");
-      navigation.navigate('HomeScreen');
+      navigation.navigate('TabNavigator');
 
     } catch (error) {
       Alert.alert('Erro!', error.message);

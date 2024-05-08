@@ -2,11 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 
 import OnboardingScreen from "./App/Screens/Onboarding/OnboardingScreen";
 import AuthScreen from "./App/Screens/AuthScreen/Authscreen";
-import HomeScreen from "./App/Screens/HomeScreen/HomeScreen";
-
 import { NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import TabNavigation from "./App/Navigations/tabNavigation";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,7 +16,8 @@ export default function App() {
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} 
           options={{headerShown: false}}/>
           <Stack.Screen name="AuthScreen" component={AuthScreen} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="TabNavigator" component={TabNavigation} options={{headerShown: false}}/>
+          
         </Stack.Navigator>
       </NavigationContainer>
     </View>
