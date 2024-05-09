@@ -90,7 +90,6 @@ function AuthScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    backgroundColor: "#black",
     alignItems: "center",
     padding: 10
   },
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     padding: 20,
-    backgroundColor: '#200fbab4',
+    backgroundColor: '#6B52AE',
     shadowColor: "#0000",
     borderRadius: 30
   },
@@ -129,8 +128,7 @@ const styles = StyleSheet.create({
 
   button: {
     paddingTop: 50,
-    width: 350,
-    backgroundColor: "FFFFFF"
+    width: 350
   }
 });
 

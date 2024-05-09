@@ -24,7 +24,8 @@ export default function OnboardingScreen({ navigation }) {
                             Criar Conta
                         </Button>
 
-                        <Button style={{ marginTop: 15 }} mode="contained">
+                        <Button style={{ marginTop: 15 }} mode="contained"
+                        onPress={() => navigation.navigate('LoginScreen')}>
                             Entrar
                         </Button>
                     </View>
