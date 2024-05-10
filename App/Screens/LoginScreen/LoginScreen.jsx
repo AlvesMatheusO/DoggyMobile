@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, Alert, TextInput, Image } from "react-native";
 import { Button } from 'react-native-paper';
 import api from '../../Services/api.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function LoginScreen({ navigation }) {
 
@@ -12,10 +14,14 @@ export default function LoginScreen({ navigation }) {
         const combinedText = email + password;
 
         try {
-            await api.post('auth/user', {
+          const response =  await api.post('auth/user', {
                 email: email,
                 password: password
             });
+
+            const token = response.data.token;
+            await AsyncStorage.setItem('userToken', token);
+            console.log(token)
             Alert.alert("Bem vindo ao Doggy!");
             navigation.navigate('TabNavigator');
 

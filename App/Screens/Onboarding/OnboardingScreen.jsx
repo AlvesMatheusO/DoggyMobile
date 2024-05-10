@@ -1,11 +1,25 @@
 import { padding } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Image, ImageBackground } from "react-native";
 import { Button } from "react-native-paper";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import AuthScreen from "../AuthScreen/Authscreen";
 
 export default function OnboardingScreen({ navigation }) {
+
+    useEffect(() => {
+        checkIfLoggedIn();
+    }, []);
+
+    const checkIfLoggedIn = async () => {
+        const token = await AsyncStorage.getItem('userToken');
+
+        if (token) {
+            navigation.navigate('TabNavigator');
+        }
+    }
 
     return (
         <View style={styles.container}>
