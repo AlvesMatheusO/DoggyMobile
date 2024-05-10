@@ -22,9 +22,7 @@ export default function Header() {
 const styles = StyleSheet.create({
 
     container: {
-        top:10,
-        padding: 15,
-        paddingTop: 10,
+        padding: 12,
         alignItems: "center",
         alignContent: "center",
         borderBottomLeftRadius: 30,
