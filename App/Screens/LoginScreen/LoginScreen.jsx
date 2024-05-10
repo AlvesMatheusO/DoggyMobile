@@ -12,7 +12,7 @@ export default function LoginScreen({ navigation }) {
         const combinedText = email + password;
 
         try {
-            await api.post('auth/login', {
+            await api.post('auth/user', {
                 email: email,
                 password: password
             });
@@ -20,6 +20,8 @@ export default function LoginScreen({ navigation }) {
             navigation.navigate('TabNavigator');
 
         } catch (error) {
+            console.log(email)
+            console.log(password)
             Alert.alert('Erro!', error.message);
         }
     }
