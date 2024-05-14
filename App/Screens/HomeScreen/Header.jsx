@@ -1,25 +1,30 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet, SafeAreaView } from 'react-native'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
-import { LinearGradient } from 'expo-linear-gradient';
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+export default function Header({ navigation }) {
 
-export default function Header() {
+    const handleLogout = async () => {
+        await AsyncStorage.removeItem('authToken');
+        navigation.navigate('LoginScreen');
+    }
     return (
+        <View
+            style={styles.container}>
 
-            <View
-                style={styles.container}>
-
-                <View style={styles.logoContainer}>
-                    <Image source={require('../../../assets/logo.png')}
-                        style={styles.logo} />
-                </View>
-
-                <View style={styles.logoutIcon}>
-                <AntDesign name="logout" size={27} color="white" />
-                </View>
+            <View style={styles.logoContainer}>
+                <Image source={require('../../../assets/logo.png')}
+                    style={styles.logo} />
             </View>
+
+            <TouchableOpacity style={styles.logoutIcon} >
+
+                <AntDesign name="logout" size={27} color="white" />
+
+            </TouchableOpacity>
+        </View>
+
     )
 }
 
@@ -33,7 +38,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#520CA8'
     },
     logoContainer: {
-    paddingLeft: 30
+        paddingLeft: 30
 
     },
 
@@ -46,6 +51,5 @@ const styles = StyleSheet.create({
         paddingTop: 7,
         paddingLeft: 280
     },
-
 })
 

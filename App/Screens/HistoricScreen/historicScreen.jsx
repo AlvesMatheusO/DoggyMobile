@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Header from '../HomeScreen/Header';
 import api from '../../Services/api.js';
 import HistoricCard from '../../Components/HistoricCard/historicCard.jsx';
-import { ScrollView, SafeAreaView, StyleSheet} from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 
 
@@ -65,9 +65,6 @@ function HistoricScreen() {
 
     return (
         <View>
-            <View>
-                <Header />
-            </View>
             <ScrollView style={styles.container}>
                 <HistoricCard
                     foods={foods}
@@ -89,9 +86,9 @@ function HistoricScreen() {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        marginBottom:20,
-        padding:5
+    container: {
+        marginBottom: 20,
+        padding: 5
     }
 })
 

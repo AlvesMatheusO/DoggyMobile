@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import { Button } from 'react-native-paper';
-import Header from './Header'
 import Chart from '../../Components/HomeChart/Chart.jsx'
 import DropDownPicker from 'react-native-dropdown-picker';
 import api from '../../Services/api.js';
@@ -73,9 +72,7 @@ export default function HomeScreen() {
   return (
 
     <View>
-      <View>
-        <Header />
-      </View>
+
 
       <View style={styles.container}>
         <View>

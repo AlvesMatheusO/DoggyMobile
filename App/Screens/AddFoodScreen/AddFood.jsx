@@ -1,7 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Alert } from 'react-native'
 import { Button } from 'react-native-paper';
 import React, { useState } from 'react'
-import Header from '../HomeScreen/Header'
 import api from '../../Services/api.js'
 
 export default AddFood = () => {
@@ -93,7 +92,6 @@ export default AddFood = () => {
 
   return (
     <View>
-      <Header />
       <View style={styles.container}>
         <View style={styles.title}>
           <Text style={{ fontSize: 25 }}>Adicionar ração</Text>
