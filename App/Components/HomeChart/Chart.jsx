@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../Services/api.js';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { Dimensions } from "react-native";
 
 import {
     LineChart
@@ -71,9 +70,9 @@ export default class ChartHome extends Component {
                     yAxisLabel="R$"
                     yAxisInterval={1}
                     chartConfig={{
-                        backgroundColor: "#e26a00",
-                        backgroundGradientFrom: "#fb8c00",
-                        backgroundGradientTo: "#ffa726",
+                        backgroundColor: "#B0C4DE",
+                        backgroundGradientFrom: "#520CA8",
+                        backgroundGradientTo: "#B0C4DE",
                         decimalPlaces: 2,
                         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                         labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

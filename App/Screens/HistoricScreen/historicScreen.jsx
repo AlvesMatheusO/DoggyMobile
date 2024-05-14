@@ -90,7 +90,6 @@ function HistoricScreen() {
 
 const styles = StyleSheet.create({
     container:{
-        marginTop:10,
         marginBottom:20,
         padding:5
     }

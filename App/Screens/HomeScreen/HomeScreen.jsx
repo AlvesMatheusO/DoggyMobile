@@ -117,8 +117,8 @@ export default function HomeScreen() {
 
       <View style={styles.containerResult}>
         <View style={styles.result}>
-          <Text>Total gasto no mês: {selectedMonth}</Text>
-          <Text>R$ {totalGasto}</Text>
+          <Text style={{color: "#FFF", fontWeight: "bold"}}>Total gasto no mês: {selectedMonth}</Text>
+          <Text style={{color: "#FFF", fontWeight: "bold"}}>R$ {totalGasto}</Text>
         </View>
         <View>
           <Chart />
@@ -149,7 +149,8 @@ const styles = StyleSheet.create({
     padding: 40,
     alignItems: "center",
     alignContent: "center",
-    bottom: 80
+    bottom: 80,
+    
   },
 
   result: {
@@ -159,5 +160,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
     backgroundColor: '#200fbab4',
     borderRadius: 10,
+   
   }
 });

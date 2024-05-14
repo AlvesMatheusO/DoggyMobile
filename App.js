@@ -7,12 +7,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNavigation from "./App/Navigations/tabNavigation";
 import LoginScreen from "./App/Screens/LoginScreen/LoginScreen";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#6B52AE" translucent={false} />
+      <StatusBar backgroundColor="#520CA8" translucent={false} />
       <NavigationContainer>
 
         <Stack.Navigator initialRouteName="OnboardingScreen">
@@ -49,6 +50,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
   },
 });
