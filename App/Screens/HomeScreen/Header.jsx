@@ -3,11 +3,12 @@ import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export default function Header({ navigation }) {
 
     const handleLogout = async () => {
         await AsyncStorage.removeItem('authToken');
-        navigation.navigate('LoginScreen');
+        navigation.navigate('OnboardingScreen');
     }
     return (
         <View
@@ -18,7 +19,7 @@ export default function Header({ navigation }) {
                     style={styles.logo} />
             </View>
 
-            <TouchableOpacity style={styles.logoutIcon} >
+            <TouchableOpacity style={styles.logoutIcon} onPress={handleLogout} >
 
                 <AntDesign name="logout" size={27} color="white" />
 
