@@ -1,35 +1,30 @@
-import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
-import Chart from '../../Components/HomeChart/Chart.jsx'
+import Chart from '../../Components/HomeChart/Chart.jsx';
 import DropDownPicker from 'react-native-dropdown-picker';
 import api from '../../Services/api.js';
 
-
-
 export default function HomeScreen() {
-
-  const [monthSearch, setmonthSearch] = useState('');
   const [totalGasto, setTotalGasto] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [yearSearch, setYearSearch] = useState('');
 
-
   const [open, setOpen] = useState(false);
   const [openY, setOpenY] = useState(false);
   const months = [
-    { label: 'Janeiro', value: '1' },
-    { label: 'Fevereiro', value: '2' },
-    { label: 'Março', value: '3' },
-    { label: 'Abril', value: '4' },
-    { label: 'Maio', value: '5' },
-    { label: 'Junho', value: '6' },
-    { label: 'Julho', value: '7' },
-    { label: 'Agosto', value: '8' },
-    { label: 'Setembro', value: '9' },
-    { label: 'Outubro', value: '10' },
-    { label: 'Novembro', value: '11' },
-    { label: 'Dezembro', value: '12' }
+    { label: 'Janeiro', value: '0' },
+    { label: 'Fevereiro', value: '1' },
+    { label: 'Março', value: '2' },
+    { label: 'Abril', value: '3' },
+    { label: 'Maio', value: '4' },
+    { label: 'Junho', value: '5' },
+    { label: 'Julho', value: '6' },
+    { label: 'Agosto', value: '7' },
+    { label: 'Setembro', value: '8' },
+    { label: 'Outubro', value: '9' },
+    { label: 'Novembro', value: '10' },
+    { label: 'Dezembro', value: '11' }
   ];
 
   const years = [
@@ -38,93 +33,74 @@ export default function HomeScreen() {
     { label: '2024', value: '2024' },
   ];
 
-
-
-  const handlemonthSearchChange = (event) => {
-    setmonthSearch(event.target.value);
-  };
-  const handleYearChange = (event) => {
-    setYearSearch(event.target.value);
-  };
-
-
   const calculateTotalperMonth = async () => {
-
+    console.log("Selected Month:", selectedMonth);
     try {
-      const response = await api("/weight", {
+      const response = await api.get("/weight", {
         params: {
           numero: selectedMonth
         }
       });
+      console.log("API Response:", response.data);
+
       const total = response.data[selectedMonth] || 0;
-
       setTotalGasto(total.toFixed(2));
-
-      console.log(total)
+      console.log("Total Gasto:", total);
     } catch (error) {
       console.error("Erro ao calcular por mês", error);
     }
   };
 
-
-
-
   return (
-
     <View>
-
-
       <View style={styles.container}>
         <View>
           <Text>Selecione o mês</Text>
         </View>
-
         <View>
-          <DropDownPicker style={styles.dropdownContainer}
+          <DropDownPicker
+            style={styles.dropdownContainer}
             open={open}
-            value={selectedMonth} // Use selectedMonth as value
+            value={selectedMonth}
             items={months}
             setOpen={setOpen}
-            setValue={setSelectedMonth} // Set selected month
-            setItems={setSelectedMonth}
+            setValue={setSelectedMonth}
+            setItems={() => {}} // No need to change items
+            placeholder='Selecione o Mês'
           />
         </View>
-
         <View>
           <Text>No ano:</Text>
         </View>
-
         <View style={styles.dropdown2}>
           <DropDownPicker
             open={openY}
-            value={yearSearch} // Use selectedMonth as value
+            value={yearSearch}
             items={years}
             setOpen={setOpenY}
-            setValue={setYearSearch} // Set selected month
-            setItems={setYearSearch}
+            setValue={setYearSearch}
+            setItems={() => {}} // No need to change items
+            placeholder='Selecione o Ano'
           />
         </View>
         <View style={styles.button}>
-          <Button mode="contained" onPress={(e) => calculateTotalperMonth(e)}>Enviar</Button>
+          <Button mode="contained" onPress={calculateTotalperMonth}>Enviar</Button>
         </View>
-
-
-
       </View>
 
       <View style={styles.containerResult}>
         <View style={styles.result}>
-          <Text style={{color: "#FFF", fontWeight: "bold"}}>Total gasto no mês: {selectedMonth}</Text>
+          <Text style={{color: "#FFF", fontWeight: "bold"}}>Total gasto no mês: {selectedMonth !== null ? months[selectedMonth].label : ''}</Text>
           <Text style={{color: "#FFF", fontWeight: "bold"}}>R$ {totalGasto}</Text>
         </View>
         <View>
           <Chart />
         </View>
       </View>
-
     </View>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     padding: 40
@@ -132,24 +108,19 @@ const styles = StyleSheet.create({
   button: {
     padding: 30
   },
-
   dropdownContainer: {
     zIndex: 2,
     elevation: 1
   },
-
   dropdown2: {
     zIndex: 1
   },
-
   containerResult: {
     padding: 40,
     alignItems: "center",
     alignContent: "center",
     bottom: 80,
-    
   },
-
   result: {
     padding: 50,
     width: 380,
@@ -157,6 +128,5 @@ const styles = StyleSheet.create({
     alignContent: "center",
     backgroundColor: '#200fbab4',
     borderRadius: 10,
-   
   }
 });
