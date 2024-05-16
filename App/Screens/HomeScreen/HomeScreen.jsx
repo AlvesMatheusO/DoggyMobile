@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import Chart from '../../Components/HomeChart/Chart.jsx';
 import DropDownPicker from 'react-native-dropdown-picker';
 import api from '../../Services/api.js';
 
 export default function HomeScreen() {
+
   const [totalGasto, setTotalGasto] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [yearSearch, setYearSearch] = useState('');
 
   const [open, setOpen] = useState(false);
   const [openY, setOpenY] = useState(false);
+
   const months = [
     { label: 'Janeiro', value: '0' },
     { label: 'Fevereiro', value: '1' },
@@ -34,24 +36,25 @@ export default function HomeScreen() {
   ];
 
   const calculateTotalperMonth = async () => {
-    console.log("Selected Month:", selectedMonth);
+
     try {
       const response = await api.get("/weight", {
         params: {
           numero: selectedMonth
         }
       });
-      console.log("API Response:", response.data);
 
       const total = response.data[selectedMonth] || 0;
       setTotalGasto(total.toFixed(2));
-      console.log("Total Gasto:", total);
+
     } catch (error) {
-      console.error("Erro ao calcular por mês", error);
+
+      Alert.alert("Ocorreu um erro ao calcular. ", error);
     }
   };
 
   return (
+
     <View>
       <View style={styles.container}>
         <View>
@@ -65,7 +68,7 @@ export default function HomeScreen() {
             items={months}
             setOpen={setOpen}
             setValue={setSelectedMonth}
-            setItems={() => {}} // No need to change items
+            setItems={() => {}} 
             placeholder='Selecione o Mês'
           />
         </View>
@@ -79,7 +82,7 @@ export default function HomeScreen() {
             items={years}
             setOpen={setOpenY}
             setValue={setYearSearch}
-            setItems={() => {}} // No need to change items
+            setItems={() => {}} 
             placeholder='Selecione o Ano'
           />
         </View>

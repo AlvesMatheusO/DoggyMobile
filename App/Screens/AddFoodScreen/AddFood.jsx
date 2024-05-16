@@ -1,14 +1,18 @@
-import { View, Text, TextInput, StyleSheet, Alert, Button, Pressable, Platform } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, Button , Pressable, Platform } from 'react-native';
 import React, { useState } from 'react';
 import api from '../../Services/api.js';
 import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import HistoricScreen from '../HistoricScreen/historicScreen.jsx';
 
 const AddFood = () => {
   const [brand, setBrand] = useState('');
   const [kg, setKG] = useState('');
   const [price, setPrice] = useState('');
   const [date, setDate] = useState(new Date());
+
   const [showPicker, setShowPicker] = useState(false);
+  const [foods, setFoods] = useState([]);
 
   const toggleDatePicker = () => {
     setShowPicker(!showPicker);
@@ -68,23 +72,58 @@ const AddFood = () => {
       }
 
       const formattedDate = formatDate(date);
+      const userID = await AsyncStorage.getItem('userToken'); // Use the correct key for userID
+      const token = await AsyncStorage.getItem('userToken');
+
+      if (!userID || !token) {
+        throw new Error('User not authenticated.');
+      }
 
       const response = await api.post('/food', {
-        brand,
+        brand: brand,
         date: formattedDate,
         kg: parseFloat(kg),
-        price: parseFloat(price)
+        price: parseFloat(price),
+        userID: userID // Ensure you send userID in the payload
       });
 
-      if (response.status === 200) {
+      console.log('Response status:', response.status);
+      console.log('Response data:', response.data);
+
+      if (response.status == 201) {
         Alert.alert('Inserir Ração', 'Ração inserida com sucesso!', [{ text: 'Sair' }]);
+
+        try {
+          const response = await api.get('/food');
+          const data = response.data;
+          setFoods(data);
+          console.log("conectou");
+
+        } catch (error) {
+          console.log(error);
+          alert("Não foi possivel carregador suas inserções, tente recarregar a página.");
+        }
       } else {
         throw new Error('Erro ao inserir ração.');
       }
     } catch (error) {
-      Alert.alert('Erro!', error.message);
+      if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error('Server error response:', error.response.data);
+        Alert.alert('Erro!', `Erro do servidor: ${error.response.data.message || error.message}`);
+      } else if (error.request) {
+        // Request was made but no response was received
+        console.error('No response received:', error.request);
+        Alert.alert('Erro!', 'Nenhuma resposta do servidor.');
+      } else {
+        // Something else caused the error
+        console.error('Error:', error.message);
+        Alert.alert('Erro!', error.message);
+      }
     }
   };
+
+
 
   const containsEmoji = (text) => {
     const emojiRegex = /[\u{1F600}-\u{1F64F}]/u;
@@ -141,18 +180,21 @@ const AddFood = () => {
           onChangeText={(text) => setBrand(text)}
         />
 
-        <Pressable onPress={toggleDatePicker}>
-          <View style={styles.form}>
-            <Text style={styles.label}>Data</Text>
-            <TextInput
-              style={styles.input}
-              placeholder=' Insira a data de compra'
-              value={formatDate(date)}
-              placeholderTextColor="#FFF"
-              editable={false}
-            />
-          </View>
-        </Pressable>
+        <View style={styles.form}>
+          <Text style={styles.label}>Data</Text>
+          {!showPicker && (
+            <Pressable onPress={toggleDatePicker}>
+
+              <TextInput
+                style={styles.input}
+                placeholder=' Insira a data de compra'
+                value={formatDate(date)}
+                placeholderTextColor="#FFF"
+                editable={false}
+              />
+            </Pressable>
+          )}
+        </View>
 
         {showPicker && (
           <DateTimePicker
@@ -181,7 +223,12 @@ const AddFood = () => {
       </View>
 
       <View style={styles.button}>
-        <Button title="Adicionar Ração" onPress={handlePost} />
+        <Button
+          title="Adicionar Ração"
+          onPress={handlePost}
+          color="#200fbab4"
+        />
+
       </View>
     </View>
   );
@@ -207,7 +254,13 @@ const styles = StyleSheet.create({
     padding: 4,
     backgroundColor: '#200fbab4',
     borderRadius: 10
+  },
+  btnStyle: {
+    padding: 4,
+    backgroundColor: '#200fbab4',
+    borderRadius: 10
   }
+
 });
 
 export default AddFood;
