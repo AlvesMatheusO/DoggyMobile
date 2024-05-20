@@ -10,6 +10,7 @@ const HistoricCard =
 
         const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
         const [modalEditVisible, setModalEditVisible] = useState(false);
+        const reversedFoods = [...foods].reverse();
 
         return (
             <View>
@@ -17,7 +18,7 @@ const HistoricCard =
                 <Card>
                     <Card.Content style={styles.container}>
 
-                        {foods.map((food, index) => (
+                        {reversedFoods.map((food, index) => (
 
                             <View style={styles.card} key={index}>
                                 <Text variant="titleLarge">{food.brand}</Text>
@@ -67,7 +68,6 @@ const HistoricCard =
         );
 
     };
-
 
 
 const styles = StyleSheet.create({

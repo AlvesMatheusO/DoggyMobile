@@ -1,5 +1,5 @@
 import { View, Text, TextInput, StyleSheet, Alert, Button , Pressable, Platform } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import api from '../../Services/api.js';
 import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,7 +12,25 @@ const AddFood = () => {
   const [date, setDate] = useState(new Date());
 
   const [showPicker, setShowPicker] = useState(false);
-  const [foods, setFoods] = useState([]);
+  const [foods, setFoods] = useState([]);  
+
+  const getFoods = async () => {
+
+    try {
+        const response = await api.get('/food');
+        const data = response.data;
+        setFoods(data);
+        console.log("A page recarregou!");
+
+    } catch (error) {
+        console.log(error);
+        alert("Não foi possivel carregador suas inserções, tente recarregar a página.");
+    }
+};
+
+  useEffect(() => {
+    getFoods();
+}, []);
 
   const toggleDatePicker = () => {
     setShowPicker(!showPicker);
@@ -93,18 +111,9 @@ const AddFood = () => {
       if (response.status == 201) {
         Alert.alert('Inserir Ração', 'Ração inserida com sucesso!', [{ text: 'Sair' }]);
 
-        try {
-          const response = await api.get('/food');
-          const data = response.data;
-          setFoods(data);
-          console.log("conectou");
+        getFoods();
 
-        } catch (error) {
-          console.log(error);
-          alert("Não foi possivel carregador suas inserções, tente recarregar a página.");
-        }
-      } else {
-        throw new Error('Erro ao inserir ração.');
+        
       }
     } catch (error) {
       if (error.response) {

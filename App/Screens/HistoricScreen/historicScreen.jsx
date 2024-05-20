@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Header from '../HomeScreen/Header';
 import api from '../../Services/api.js';
 import HistoricCard from '../../Components/HistoricCard/historicCard.jsx';
-import { ScrollView, SafeAreaView, StyleSheet } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, RefreshControl} from 'react-native';
 
 
 
@@ -18,6 +18,15 @@ function HistoricScreen() {
     const id = clicekdId;
 
     const [foods, setFoods] = useState([]);
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefreshing = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            getFoods()
+          setRefreshing(false);
+        }, 2000);
+      }, []);
 
     const getFoods = async () => {
 
@@ -65,7 +74,9 @@ function HistoricScreen() {
 
     return (
         <View>
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefreshing} />
+            }>
                 <HistoricCard
                     foods={foods}
                     getFoods={getFoods}
