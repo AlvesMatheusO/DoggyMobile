@@ -1,9 +1,17 @@
-import { View, Text, TextInput, StyleSheet, Alert, Button , Pressable, Platform } from 'react-native';
 import React, { useState, useEffect} from 'react';
-import api from '../../Services/api.js';
 import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HistoricScreen from '../HistoricScreen/historicScreen.jsx';
+import api from '../../Services/api.js';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  StyleSheet, 
+  Alert, 
+  Button , 
+  Pressable, 
+  Platform } from 'react-native';
 
 const AddFood = () => {
   const [brand, setBrand] = useState('');
@@ -13,6 +21,14 @@ const AddFood = () => {
 
   const [showPicker, setShowPicker] = useState(false);
   const [foods, setFoods] = useState([]);  
+
+  const clearFields = () => {
+    setBrand('');
+    setKG('');
+    setPrice('');
+    setDate('');
+  };
+
 
   const getFoods = async () => {
 
@@ -110,7 +126,7 @@ const AddFood = () => {
 
       if (response.status == 201) {
         Alert.alert('Inserir Ração', 'Ração inserida com sucesso!', [{ text: 'Sair' }]);
-
+        clearFields();
         getFoods();
 
         

@@ -1,12 +1,21 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Avatar, Button, Card, Text } from 'react-native-paper';
+import { Button, Card, Text } from 'react-native-paper';
 import { useState } from 'react';
 import HistoricModalDelete from '../HistoricModalDelete/historicModalDelete.jsx';
 import HistoricModalEdit from '../../Components/HistoricModalEdit/historicModalEdit.jsx';
 
 const HistoricCard =
-    ({ foods, setClickedId, deleteFood, editFood, brand, setBrand, kg, setKg, price, setPrice }) => {
+    ({ foods,
+         setClickedId, 
+         deleteFood, 
+         editFood, 
+         brand, 
+         setBrand, 
+         kg, 
+         setKg, 
+         price, 
+         setPrice }) => {
 
         const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
         const [modalEditVisible, setModalEditVisible] = useState(false);
