@@ -4,53 +4,58 @@ import { Button, Card, Text } from 'react-native-paper';
 import { useState } from 'react';
 import HistoricModalDelete from '../HistoricModalDelete/historicModalDelete.jsx';
 import HistoricModalEdit from '../../Components/HistoricModalEdit/historicModalEdit.jsx';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HistoricCard =
-    ({ foods,
-         setClickedId, 
-         deleteFood, 
-         editFood, 
-         brand, 
-         setBrand, 
-         kg, 
-         setKg, 
-         price, 
-         setPrice }) => {
+    ({ 
+        foods,
+        setClickedId, 
+        deleteFood, 
+        editFood, 
+        brand, 
+        setBrand, 
+        kg, 
+        setKg, 
+        price, 
+        setPrice 
+    }) => {
 
         const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
         const [modalEditVisible, setModalEditVisible] = useState(false);
         const reversedFoods = [...foods].reverse();
+        const userID = AsyncStorage.getItem('userToken'); 
+        const token =  AsyncStorage.getItem('userToken');
 
         return (
             <View>
-                {console.log(foods)}
                 <Card>
-                    <Card.Content style={styles.container}>
+                    <Card.Content style={styles.container}> 
+                        
+                            {reversedFoods.map((food, index) => (
 
-                        {reversedFoods.map((food, index) => (
+                                <View style={styles.card} key={index}>
+                                    <Text variant="titleLarge">{food.brand}</Text>
+                                    <Text variant="bodyMedium">{food.kg.$numberDecimal} Kg</Text>
+                                    <Text variant="bodyMedium">R$ {food.price.$numberDecimal}</Text>
+                                    <Text variant="bodyMedium">{food.date}</Text>
 
-                            <View style={styles.card} key={index}>
-                                <Text variant="titleLarge">{food.brand}</Text>
-                                <Text variant="bodyMedium">{food.kg.$numberDecimal} Kg</Text>
-                                <Text variant="bodyMedium">R$ {food.price.$numberDecimal}</Text>
-                                <Text variant="bodyMedium">{food.date}</Text>
+                                    <Card.Actions>
+                                        <Button
+                                            onPress={() => {
+                                                setClickedId(food._id)
+                                                setModalEditVisible(true)
+                                            }}>Editar</Button>
 
-                                <Card.Actions>
-                                    <Button
-                                        onPress={() => {
-                                            setClickedId(food._id)
-                                            setModalEditVisible(true)
-                                        }}>Editar</Button>
-
-                                    <Button
-                                        onPress={() => {
-                                            setClickedId(food._id)
-                                            setModalDeleteVisible(true)
-                                        }}
-                                    >Deletar</Button>
-                                </Card.Actions>
-                            </View>
-                        ))}
+                                        <Button
+                                            onPress={() => {
+                                                setClickedId(food._id)
+                                                setModalDeleteVisible(true)
+                                            }}
+                                        >Deletar</Button>
+                                    </Card.Actions>
+                                </View>
+                            ))}
+                    
                     </Card.Content>
                 </Card>
 

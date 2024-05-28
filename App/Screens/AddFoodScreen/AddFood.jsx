@@ -129,7 +129,6 @@ const AddFood = () => {
         clearFields();
         getFoods();
 
-        
       }
     } catch (error) {
       if (error.response) {

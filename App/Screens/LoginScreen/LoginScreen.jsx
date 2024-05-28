@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Alert, TextInput, Image } from "react-native";
+import { View, Text, StyleSheet, Alert, TextInput, Image, Pressable } from "react-native";
 import { Button } from 'react-native-paper';
 import api from '../../Services/api.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,7 +14,7 @@ export default function LoginScreen({ navigation }) {
         const combinedText = email + password;
 
         try {
-          const response =  await api.post('auth/user', {
+            const response = await api.post('auth/user', {
                 email: email,
                 password: password
             });
@@ -36,7 +36,7 @@ export default function LoginScreen({ navigation }) {
         <View style={styles.container}>
 
             <View>
-                <Image 
+                <Image
                     style={styles.logo}
                     source={require('../../../assets/logo.png')}
                 />
@@ -59,11 +59,15 @@ export default function LoginScreen({ navigation }) {
                     placeholder="Digite sua senha cadastrada."
                 />
 
+                <View style={styles.button}>
+                    <Button mode="contained" buttonColor="#FFF" textColor="#000" onPress={handleLogin}>Entrar</Button>
+                </View>
+
             </View>
 
-            <View style={styles.button}>
-                <Button mode="contained" onPress={handleLogin}>Entrar</Button>
-            </View>
+            <Pressable onPress={() => navigation.navigate('EmailVerification')}>
+                <Text style={styles.recoverPass}>Recuperar senha</Text>
+            </Pressable>
         </View>
     );
 }
@@ -76,6 +80,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     logo: {
+        marginTop: 40,
         height: 150,
         width: 130
     },
@@ -92,15 +97,20 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        width: 250,
         margin: 12,
         padding: 4,
         borderRadius: 10,
         backgroundColor: "#FFFFFF"
     },
     button: {
-        paddingTop: 50,
+        paddingTop: 30,
         width: 350,
+
+    },
+    recoverPass: {
+        marginTop: 10,
+        fontWeight: "900",
+        color: "#6B53AE"
     }
 
 
